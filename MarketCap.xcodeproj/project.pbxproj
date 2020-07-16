@@ -14,6 +14,7 @@
 		924CE8B824C0D6CB00668D74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924CE8B624C0D6CB00668D74 /* Main.storyboard */; };
 		924CE8C424C0D6CB00668D74 /* MarketCapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924CE8C324C0D6CB00668D74 /* MarketCapTests.swift */; };
 		924CE8CF24C0D6CB00668D74 /* MarketCapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924CE8CE24C0D6CB00668D74 /* MarketCapUITests.swift */; };
+		9286EF6C24C0DF8100FFE836 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EF6B24C0DF8100FFE836 /* Api.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		924CE8CA24C0D6CB00668D74 /* MarketCapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketCapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		924CE8CE24C0D6CB00668D74 /* MarketCapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCapUITests.swift; sourceTree = "<group>"; };
 		924CE8D024C0D6CB00668D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9286EF6B24C0DF8100FFE836 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				924CE8AD24C0D6C800668D74 /* AppDelegate.swift */,
+				9286EF6B24C0DF8100FFE836 /* Api.swift */,
 				924CE8AF24C0D6C800668D74 /* ContentView.swift */,
 				924CE8B124C0D6CB00668D74 /* Assets.xcassets */,
 				924CE8B624C0D6CB00668D74 /* Main.storyboard */,
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9286EF6C24C0DF8100FFE836 /* Api.swift in Sources */,
 				924CE8B024C0D6C800668D74 /* ContentView.swift in Sources */,
 				924CE8AE24C0D6C800668D74 /* AppDelegate.swift in Sources */,
 			);
