@@ -14,8 +14,8 @@
 		924CE8B824C0D6CB00668D74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924CE8B624C0D6CB00668D74 /* Main.storyboard */; };
 		924CE8C424C0D6CB00668D74 /* MarketCapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924CE8C324C0D6CB00668D74 /* MarketCapTests.swift */; };
 		924CE8CF24C0D6CB00668D74 /* MarketCapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924CE8CE24C0D6CB00668D74 /* MarketCapUITests.swift */; };
-		9286EF6C24C0DF8100FFE836 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EF6B24C0DF8100FFE836 /* Api.swift */; };
-		9286EF6E24C0EDE300FFE836 /* ApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EF6D24C0EDE300FFE836 /* ApiTest.swift */; };
+		9286EF6C24C0DF8100FFE836 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EF6B24C0DF8100FFE836 /* Network.swift */; };
+		9286EF6E24C0EDE300FFE836 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EF6D24C0EDE300FFE836 /* NetworkTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +50,8 @@
 		924CE8CA24C0D6CB00668D74 /* MarketCapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketCapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		924CE8CE24C0D6CB00668D74 /* MarketCapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCapUITests.swift; sourceTree = "<group>"; };
 		924CE8D024C0D6CB00668D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9286EF6B24C0DF8100FFE836 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		9286EF6D24C0EDE300FFE836 /* ApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTest.swift; sourceTree = "<group>"; };
+		9286EF6B24C0DF8100FFE836 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		9286EF6D24C0EDE300FFE836 /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				924CE8AD24C0D6C800668D74 /* AppDelegate.swift */,
-				9286EF6B24C0DF8100FFE836 /* Api.swift */,
+				9286EF6B24C0DF8100FFE836 /* Network.swift */,
 				924CE8AF24C0D6C800668D74 /* ContentView.swift */,
 				924CE8B124C0D6CB00668D74 /* Assets.xcassets */,
 				924CE8B624C0D6CB00668D74 /* Main.storyboard */,
@@ -127,7 +127,7 @@
 			children = (
 				924CE8C324C0D6CB00668D74 /* MarketCapTests.swift */,
 				924CE8C524C0D6CB00668D74 /* Info.plist */,
-				9286EF6D24C0EDE300FFE836 /* ApiTest.swift */,
+				9286EF6D24C0EDE300FFE836 /* NetworkTest.swift */,
 			);
 			path = MarketCapTests;
 			sourceTree = "<group>";
@@ -272,7 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9286EF6C24C0DF8100FFE836 /* Api.swift in Sources */,
+				9286EF6C24C0DF8100FFE836 /* Network.swift in Sources */,
 				924CE8B024C0D6C800668D74 /* ContentView.swift in Sources */,
 				924CE8AE24C0D6C800668D74 /* AppDelegate.swift in Sources */,
 			);
@@ -282,7 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9286EF6E24C0EDE300FFE836 /* ApiTest.swift in Sources */,
+				9286EF6E24C0EDE300FFE836 /* NetworkTest.swift in Sources */,
 				924CE8C424C0D6CB00668D74 /* MarketCapTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
