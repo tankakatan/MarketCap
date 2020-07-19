@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import MarketCap
+import MarketCap
 
 class MarketCapTests: XCTestCase {
 

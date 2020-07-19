@@ -29,7 +29,7 @@ class NetworkTest: XCTestCase {
 
         let myIp = XCTestExpectation (description: "Fetched My IP")
 
-        Network.fetch (url: "https://api.myip.com", then: {
+        Network.fetch ("https://api.myip.com") {
 
             (data: Data?, response: URLResponse?, error: Error?) in
                     
@@ -42,7 +42,7 @@ class NetworkTest: XCTestCase {
             XCTAssertNil (error)
             
             myIp.fulfill ()
-        })
+        }
 
         wait (for: [myIp], timeout: 10.0)
     }
@@ -51,7 +51,7 @@ class NetworkTest: XCTestCase {
         
         let myIp = XCTestExpectation (description: "Fetched My IP")
 
-        Network.fetchJson (url: "https://api.myip.com", then: {
+        Network.fetchJson ("https://api.myip.com") {
 
             (data: MyIpResponse?, response: URLResponse?, error: Error?) -> Void in
 
@@ -63,7 +63,7 @@ class NetworkTest: XCTestCase {
             XCTAssertNotNil (data?.cc)
 
             myIp.fulfill ()
-        })
+        }
 
         wait (for: [myIp], timeout: 10.0)
     }
@@ -72,7 +72,7 @@ class NetworkTest: XCTestCase {
         
         let myIp = XCTestExpectation (description: "Fetched My IP")
 
-        Network.getJson (url: "https://api.myip.com", then: {
+        Network.getJson ("https://api.myip.com") {
 
             (data: MyIpResponse?, response: URLResponse?, error: Error?) -> Void in
 
@@ -84,7 +84,7 @@ class NetworkTest: XCTestCase {
             XCTAssertNotNil (data?.cc)
 
             myIp.fulfill ()
-        })
+        }
 
         wait (for: [myIp], timeout: 10.0)
     }

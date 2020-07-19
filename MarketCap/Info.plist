@@ -32,5 +32,9 @@
 	<true/>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>ApiDomain</key>
+	<string>$(CMC_API_DOMAIN)</string>
+	<key>ApiVersion</key>
+	<string>$(CMC_API_VERSION)</string>
 </dict>
 </plist>

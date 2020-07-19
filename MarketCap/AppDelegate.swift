@@ -9,8 +9,6 @@
 import Cocoa
 import SwiftUI
 
-import Keys
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -30,9 +28,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
-        
-        let keys = MarketCapKeys ()
-        print ("CMC API Key: \(keys.cmcApiKey)")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

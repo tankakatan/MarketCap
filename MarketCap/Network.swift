@@ -19,12 +19,12 @@ public enum FetchError: Error {
 
 public struct Network {
     
-    static func fetch (
-        url urlString: String,
+    public static func fetch (
+        _ urlString: String,
         method: RequestMethod = RequestMethod.get,
         headers: [String: String] = [:],
         body: Data? = nil,
-        then: @escaping (Data?, URLResponse?, Error?) -> Void
+        _ then: @escaping (Data?, URLResponse?, Error?) -> Void
     ) {
         
         guard let urlComponents = URLComponents (string: urlString),
@@ -35,9 +35,11 @@ public struct Network {
         var request = URLRequest (url: url)
         request.httpMethod = method.rawValue
         
-        for header in headers {
-            request.addValue (header.value, forHTTPHeaderField: header.key)
+        for (k, v) in headers {
+            request.setValue (v, forHTTPHeaderField: k)
         }
+        
+        print ("Request: \(String (describing: request.allHTTPHeaderFields))")
 
         if body != nil {
 
@@ -49,101 +51,105 @@ public struct Network {
 //            }
         }
         
-        let session = URLSession (configuration: .default)
-        let task = session.dataTask (with: request, completionHandler: then)
-        
-        task.resume ()
+        URLSession.shared.dataTask (with: request, completionHandler: then).resume ()
     }
     
-    static func fetchJson<Response: Decodable> (
-        url: String,
+    public static func fetchJson<Response: Decodable> (
+        _ url: String,
         method: RequestMethod = RequestMethod.get,
         headers: [String: String] = [:],
         body: Data? = nil,
-        then: @escaping (Response?, URLResponse?, Error?) -> Void
+        _ then: @escaping (Response?, URLResponse?, Error?) -> Void
     ) {
 
+        let defaultHeaders: [String: String] = [
+            "Content-Type": "application/json",
+        ]
+
         return fetch (
-            url: url,
+            url,
             method: method,
-            headers: headers,
-            body: body,
-            then: { (data: Data?, resp: URLResponse?, err: Error?) -> Void in
-            
-                if data == nil {
-                    return then (nil, resp, err)
-                }
-                
-                do {
-                    then (
-                        try JSONDecoder ().decode (Response.self, from: data!),
-                        resp,
-                        err
-                    )
-                } catch {
-                    then (nil, resp, error)
-                }
+            headers: defaultHeaders.merging (headers) { (_, new) in new },
+            body: body
+        
+        ) { (data: Data?, resp: URLResponse?, err: Error?) -> Void in
+                        
+            if data == nil {
+                return then (nil, resp, err)
             }
-        )
+
+//            print ("Data: \(String (decoding: data!, as: UTF8.self))")
+
+            do {
+
+                then (try JSONDecoder ().decode (Response.self, from: data!), resp, err)
+
+            } catch {
+                
+//                print ("\nDecoder error: \(String (describing: error))\n")
+
+                then (nil, resp, error)
+            }
+        }
     }
     
-    static func get (
-        url: String,
+    public static func get (
+        _ url: String,
         headers: [String: String] = [:],
         body: Data? = nil,
-        then: @escaping (Data?, URLResponse?, Error?) -> Void
+        _ then: @escaping (Data?, URLResponse?, Error?) -> Void
     ) {
         return fetch (
-            url: url,
+            url,
             method: RequestMethod.get,
             headers: headers,
             body: body,
-            then: then
+            then
         )
     }
     
-    static func post (
-        url: String,
+    public static func post (
+        _ url: String,
         headers: [String: String] = [:],
         body: Data? = nil,
-        then: @escaping (Data?, URLResponse?, Error?) -> Void
+        _ then: @escaping (Data?, URLResponse?, Error?) -> Void
     ) {
         return fetch (
-            url: url,
+            url,
             method: RequestMethod.post,
             headers: headers,
             body: body,
-            then: then
+            then
         )
     }
     
-    static func getJson<Response: Decodable> (
-        url: String,
+    public static func getJson<Response: Decodable> (
+        _ url: String,
         headers: [String: String] = [:],
         body: Data? = nil,
-        then: @escaping (Response?, URLResponse?, Error?) -> Void
+        _ then: @escaping (Response?, URLResponse?, Error?) -> Void
     ) {
         return fetchJson (
-            url: url,
+            url,
             method: RequestMethod.get,
             headers: headers,
             body: body,
-            then: then
+            then
         )
     }
     
-    static func postJson<Response: Decodable> (
-        url: String,
+    public static func postJson<Response: Decodable> (
+        _ url: String,
         headers: [String: String] = [:],
         body: Data? = nil,
-        then: @escaping (Response?, URLResponse?, Error?) -> Void
+        _ then: @escaping (Response?, URLResponse?, Error?) -> Void
     ) {
         return fetchJson (
-            url: url,
+            url,
             method: RequestMethod.post,
             headers: headers,
             body: body,
-            then: then
+            then
         )
     }
 }
