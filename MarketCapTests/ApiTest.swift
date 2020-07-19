@@ -23,7 +23,7 @@ class ApiTest: XCTestCase {
 
         let listPromise = XCTestExpectation (description: "Fetched CMC Currency List")
 
-        Api.list () {
+        Api.currencies () {
 
             (data: [Currency]?, response: URLResponse?, error: Error?) in
                     

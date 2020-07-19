@@ -8,6 +8,8 @@
 
 import Foundation
 import Network
+import Combine
+import SwiftUI
 
 fileprivate struct Settings {
     static var apiUrl: String? {
@@ -17,10 +19,10 @@ fileprivate struct Settings {
     }
 }
 
-public struct Currency: Decodable {
-    var id: String
-    var name: String
-    var symbol: String
+public struct Currency: Decodable, Identifiable {
+    public var id: String
+    public var name: String
+    public var symbol: String
 }
 
 public struct Api {
@@ -29,7 +31,33 @@ public struct Api {
         return Settings.apiUrl! + "/" + path
     }
 
-    public static func list (_ then: @escaping ([Currency]?, URLResponse?, Error?) -> Void) {
+    public static func currencies (_ then: @escaping ([Currency]?, URLResponse?, Error?) -> Void) {
         Network.getJson (endpoint ("coins/list"), then)
+    }
+}
+
+public class CurrencyLoader: ObservableObject {
+    
+//    var didChange = PassthroughSubject<Currencies, Never> ()
+
+    @Published var currencies = [] as [Currency]
+//        {
+//        didSet {
+//            didChange.send (self)
+//        }
+//    }
+    
+    init () {
+        Api.currencies () { (currencies: [Currency]?, _, error: Error?) in
+
+            guard let currencies = currencies else {
+                print ("No currencies fetched, error \(String (describing: error))")
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.currencies = currencies
+            }
+        }
     }
 }
