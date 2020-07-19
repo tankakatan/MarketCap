@@ -61,3 +61,29 @@ public class CurrencyLoader: ObservableObject {
         }
     }
 }
+
+enum IconLoaderError: Error {
+    case invalidUrl (_ url: String)
+}
+
+public class IconLoader: ObservableObject {
+    
+    @Published var image: Image?
+    
+    private let source: URL
+    
+    init (_ urlString: String) throws {
+        guard let urlComponents = URLComponents (string: urlString),
+            let source = urlComponents.url else {
+                throw IconLoaderError.invalidUrl (urlString)
+        }
+        
+        self.source = source
+    }
+    
+    public func load () {
+    }
+    
+    public func cancel () {
+    }
+}
