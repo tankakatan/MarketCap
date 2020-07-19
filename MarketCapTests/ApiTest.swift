@@ -25,10 +25,13 @@ class ApiTest: XCTestCase {
 
         Api.list () {
 
-            (data: CurrencyList?, response: URLResponse?, error: Error?) in
+            (data: [Currency]?, response: URLResponse?, error: Error?) in
                     
             print ("error \(String(describing: error))")
-            print ("data \(String(describing: data))")
+            
+            for currency in data ?? [] {
+                print ("Currency: \(String (describing: currency))")
+            }
             
             XCTAssertNotNil (data)
             XCTAssertNil (error)

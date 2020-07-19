@@ -39,7 +39,7 @@ public struct Network {
             request.setValue (v, forHTTPHeaderField: k)
         }
         
-        print ("Request: \(String (describing: request.allHTTPHeaderFields))")
+//        print ("Request: \(String (describing: request.allHTTPHeaderFields))")
 
         if body != nil {
 
@@ -63,6 +63,7 @@ public struct Network {
     ) {
 
         let defaultHeaders: [String: String] = [
+            "Accept": "application/json",
             "Content-Type": "application/json",
         ]
 
