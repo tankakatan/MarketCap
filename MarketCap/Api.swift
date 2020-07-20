@@ -10,6 +10,7 @@ import Foundation
 import Network
 import Combine
 import SwiftUI
+import AppKit
 
 fileprivate struct Settings {
 
@@ -70,15 +71,8 @@ public struct Api {
 }
 
 public class CurrencyLoader: ObservableObject {
-    
-//    var didChange = PassthroughSubject<Currencies, Never> ()
 
     @Published var currencies = [] as [Currency]
-//        {
-//        didSet {
-//            didChange.send (self)
-//        }
-//    }
     
     init () {
         Api.currencies () { (currencies: [Currency]?, error: Error?) in
@@ -102,20 +96,30 @@ enum IconLoaderError: Error {
 public class IconLoader: ObservableObject {
     
     @Published var icon: Image?
-    
+    private var loading: AnyCancellable?
     private let source: URL
     
     init (icon: String) throws {
         guard let source = Api.asset (icon) else {
             throw IconLoaderError.invalidUrl (icon)
         }
-        
+
         self.source = source
     }
     
+    deinit {
+        cancel ()
+    }
+    
     public func load () {
+        loading = URLSession.shared.dataTaskPublisher (for: source)
+            .map { Image (nsImage: NSImage (data: $0.data) ?? NSImage ()) }
+            .replaceError (with: nil)
+            .receive (on: DispatchQueue.main)
+            .assign (to: \.icon, on: self)
     }
     
     public func cancel () {
+        loading?.cancel ()
     }
 }
