@@ -13,9 +13,15 @@ struct ContentView: View {
     @ObservedObject var loader = CurrencyLoader ()
 
     var body: some View {
-        List (loader.currencies) {
-            CurrencyView (currency: $0)
-        }
+        Group {
+            if loader.currencies.count == 0 {
+                Loading ()
+            } else {
+                List (loader.currencies) {
+                    CurrencyView (currency: $0)
+                }
+            }
+        }.frame (width: 400, height: 640)
     }
 }
 
