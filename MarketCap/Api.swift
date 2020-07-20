@@ -50,15 +50,15 @@ public struct CurrencyResponse: Decodable {
 public struct Api {
     
     private static func endpoint (_ path: String) -> String {
-        return Settings.apiUrl! + "/" + path
+        return Settings.apiUrl! + path
     }
     
     public static func asset (_ icon: String) -> URL? {
-        return URLComponents (string: Settings.iconUrl! + "/" + icon)?.url
+        return URLComponents (string: Settings.iconUrl! + icon)?.url
     }
 
     public static func currencies (_ then: @escaping ([Currency]?, Error?) -> Void) {
-        Network.getJson (endpoint ("search?locale=en&img_path_only=1")) {
+        Network.getJson (endpoint ("/search?locale=en&img_path_only=1")) {
             (response: CurrencyResponse?, _: URLResponse?, error: Error?) in
             
             if response != nil {
@@ -89,22 +89,15 @@ public class CurrencyLoader: ObservableObject {
     }
 }
 
-enum IconLoaderError: Error {
-    case invalidUrl (_ url: String)
-}
-
 public class IconLoader: ObservableObject {
     
     @Published var icon: Image?
-    private var loading: AnyCancellable?
-    private let source: URL
-    
-    init (icon: String) throws {
-        guard let source = Api.asset (icon) else {
-            throw IconLoaderError.invalidUrl (icon)
-        }
 
-        self.source = source
+    private var loading: AnyCancellable?
+    private let source: String?
+    
+    init (_ url: String?) {
+        source = url
     }
     
     deinit {
@@ -112,7 +105,7 @@ public class IconLoader: ObservableObject {
     }
     
     public func load () {
-        loading = URLSession.shared.dataTaskPublisher (for: source)
+        loading = URLSession.shared.dataTaskPublisher (for: Api.asset (source!)!)
             .map { Image (nsImage: NSImage (data: $0.data) ?? NSImage ()) }
             .replaceError (with: nil)
             .receive (on: DispatchQueue.main)

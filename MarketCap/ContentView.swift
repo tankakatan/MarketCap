@@ -13,7 +13,9 @@ struct ContentView: View {
     @ObservedObject var loader = CurrencyLoader ()
 
     var body: some View {
-        CurrenciesView (currencies: loader.currencies)
+        List (loader.currencies) {
+            CurrencyView (currency: $0)
+        }
     }
 }
 
@@ -36,44 +38,19 @@ struct Loading: NSViewRepresentable {
     }
 }
 
-struct CurrenciesView: View {
-    
-    var currencies: [Currency]
-
-    var body: some View {
-        ScrollView {
-            if currencies.count == 0 {
-                Group {
-                    Loading ()
-                }.frame (
-                    maxWidth: .infinity,
-                    maxHeight: .infinity,
-                    alignment: .center
-                ).background (Color.yellow)
-            } else {
-                VStack {
-                    ForEach (currencies) {
-                        CurrencyView (currency: $0)
-                    }
-                }.frame (
-                    maxWidth: .infinity,
-                    maxHeight: .infinity,
-                    alignment: .topLeading
-                ).background (Color.green)
-            }
-        }.frame (
-            maxWidth: .infinity,
-            maxHeight: .infinity,
-            alignment: .topLeading
-        ).background (Color.red)
-    }
-}
-
 struct CurrencyView: View {
+
     var currency: Currency
+
     var body: some View {
         HStack {
-//            CurrencyIconView (url: currency.id)
+
+            CurrencyIconView (icon: currency.icon)
+                .aspectRatio (1.0, contentMode: .fit)
+                .frame (width: 32, height: 32)
+                .fixedSize (horizontal: true, vertical: false)
+                .cornerRadius (4.0)
+
             Text (currency.symbol)
             Text (currency.name)
         }
@@ -83,11 +60,12 @@ struct CurrencyView: View {
 struct CurrencyIconView: View {
 
     @ObservedObject private var loader: IconLoader
-    private let placeholder: Image?
 
-    init (icon: String, placeholder: String = "icon-placeholder") {
-        loader = try! IconLoader (icon: icon)
-        self.placeholder = (Image (placeholder) as Image).scaledToFit () as? Image
+    private let placeholder: Image
+
+    init (icon: String?, placeholder: String = "icon-placeholder") {
+        loader = IconLoader (icon)
+        self.placeholder = Image (placeholder) as Image
     }
     
     var body: some View {
@@ -97,7 +75,13 @@ struct CurrencyIconView: View {
     }
 
     private var image: some View {
-        placeholder
+        Group {
+            if loader.icon != nil {
+                loader.icon!.resizable ()
+            } else {
+                placeholder.resizable ()
+            }
+        }
     }
 }
 
