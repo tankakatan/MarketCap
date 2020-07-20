@@ -464,6 +464,7 @@
 				DEVELOPMENT_TEAM = 38LG3CG9GX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ICON_URL = "https://assets.coingecko.com";
 				INFOPLIST_FILE = MarketCap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -490,6 +491,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTABILITY = YES;
+				ICON_URL = "https://assets.coingecko.com";
 				INFOPLIST_FILE = MarketCap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -34,5 +34,7 @@
 	<true/>
 	<key>ApiUrl</key>
 	<string>$(API_URL)</string>
+	<key>IconUrl</key>
+	<string>$(ICON_URL)</string>
 </dict>
 </plist>

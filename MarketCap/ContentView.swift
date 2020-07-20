@@ -85,8 +85,8 @@ struct CurrencyIconView: View {
     @ObservedObject private var loader: IconLoader
     private let placeholder: Image?
 
-    init (url: String, placeholder: String = "icon-placeholder") {
-        loader = try! IconLoader (url)
+    init (icon: String, placeholder: String = "icon-placeholder") {
+        loader = try! IconLoader (icon: icon)
         self.placeholder = (Image (placeholder) as Image).scaledToFit () as? Image
     }
     

@@ -25,7 +25,7 @@ class ApiTest: XCTestCase {
 
         Api.currencies () {
 
-            (data: [Currency]?, response: URLResponse?, error: Error?) in
+            (data: [Currency]?, error: Error?) in
                     
             print ("error \(String(describing: error))")
             
