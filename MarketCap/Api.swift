@@ -70,7 +70,7 @@ public struct Api {
     }
 }
 
-public class CurrencyLoader: ObservableObject {
+public class CurrencyListLoader: ObservableObject {
 
     @Published var currencies = [] as [Currency]
     
