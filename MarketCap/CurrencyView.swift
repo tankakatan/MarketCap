@@ -14,7 +14,7 @@ struct CurrencyView: View {
 
     var body: some View {
         VStack {
-            CurrencyIcon (icon: currency.image)
+            CurrencyLogo (icon: currency.image)
             Text (currency.name)
         }.frame (maxWidth: .infinity, maxHeight: .infinity)
     }

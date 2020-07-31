@@ -16,10 +16,10 @@ struct CurrencyRow: View {
 
         HStack {
 
-            CurrencyIcon (icon: currency.image)
-                .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: 32, height: 32)
-                .fixedSize(horizontal: true, vertical: false)
+            CurrencyLogo (icon: currency.image)
+                .aspectRatio (1.0, contentMode: .fit)
+                .frame (width: 32, height: 32)
+                .fixedSize (horizontal: true, vertical: false)
 
             VStack (alignment: .leading) {
                 Text (currency.symbol)

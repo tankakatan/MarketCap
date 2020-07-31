@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-struct CurrencyIcon: View {
+struct CurrencyLogo: View {
 
-    @ObservedObject private var loader: IconLoader
+    @ObservedObject private var loader: CurrencyLogoLoader
 
     private let placeholder: Image
 
     init (icon: String?, placeholder: String = "icon-placeholder") {
-        loader = IconLoader (icon)
+        loader = CurrencyLogoLoader (icon)
         self.placeholder = Image (placeholder) as Image
     }
     
@@ -27,8 +27,8 @@ struct CurrencyIcon: View {
 
     private var image: some View {
         Group {
-            if loader.icon != nil {
-                loader.icon!.resizable ()
+            if loader.logo != nil {
+                loader.logo!.resizable ()
             } else {
                 placeholder.resizable ()
             }
@@ -38,6 +38,6 @@ struct CurrencyIcon: View {
 
 struct CurrencyIcon_Previews: PreviewProvider {
     static var previews: some View {
-        CurrencyIcon (icon: "coins/images/1/thumb/bitcoin.png")
+        CurrencyLogo (icon: "coins/images/1/thumb/bitcoin.png")
     }
 }
