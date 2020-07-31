@@ -17,22 +17,33 @@ public enum FetchError: Error {
     case invalidUrl
 }
 
+enum DateError: String, Error {
+    case invalidDate
+}
+
 public struct Network {
     
     public static func fetch (
         _ urlString: String,
         method: RequestMethod = RequestMethod.get,
         headers: [String: String] = [:],
+        query: [String: String]? = nil,
         body: Data? = nil,
         _ then: @escaping (Data?, URLResponse?, Error?) -> Void
     ) {
         
-        guard let urlComponents = URLComponents (string: urlString),
-            let url = urlComponents.url else {
+        guard var urlComponents = URLComponents (string: urlString) else {
                 return then (nil, nil, FetchError.invalidUrl)
         }
         
-        var request = URLRequest (url: url)
+        if query != nil {
+            urlComponents.queryItems = []
+            for (k, v) in query! {
+                urlComponents.queryItems?.append (URLQueryItem (name: k, value: v))
+            }
+        }
+        
+        var request = URLRequest (url: urlComponents.url!.absoluteURL)
         request.httpMethod = method.rawValue
         
         for (k, v) in headers {
@@ -58,6 +69,7 @@ public struct Network {
         _ url: String,
         method: RequestMethod = RequestMethod.get,
         headers: [String: String] = [:],
+        query: [String: String]? = nil,
         body: Data? = nil,
         _ then: @escaping (Response?, URLResponse?, Error?) -> Void
     ) {
@@ -71,6 +83,7 @@ public struct Network {
             url,
             method: method,
             headers: defaultHeaders.merging (headers) { (_, new) in new },
+            query: query,
             body: body
         
         ) { (data: Data?, resp: URLResponse?, err: Error?) -> Void in
@@ -82,8 +95,33 @@ public struct Network {
 //            print ("Data: \(String (decoding: data!, as: UTF8.self))")
 
             do {
+                
+                let decoder = JSONDecoder ()
 
-                then (try JSONDecoder ().decode (Response.self, from: data!), resp, err)
+                let dateFormatter = DateFormatter ()
+                dateFormatter.calendar = Calendar (identifier: .iso8601)
+                dateFormatter.locale = Locale (identifier: "en_US_POSIX")
+                dateFormatter.timeZone = TimeZone (secondsFromGMT: 0)
+                
+                decoder.dateDecodingStrategy = .custom ({ (decoder) -> Date in
+
+                    let container = try decoder.singleValueContainer ()
+                    let dateStr = try container.decode (String.self)
+
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+                    if let date = dateFormatter.date (from: dateStr) {
+                        return date
+                    }
+
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
+                    if let date = dateFormatter.date (from: dateStr) {
+                        return date
+                    }
+                    
+                    throw DateError.invalidDate
+                })
+
+                then (try decoder.decode (Response.self, from: data!), resp, err)
 
             } catch {
                 
@@ -97,6 +135,7 @@ public struct Network {
     public static func get (
         _ url: String,
         headers: [String: String] = [:],
+        query: [String: String]? = nil,
         body: Data? = nil,
         _ then: @escaping (Data?, URLResponse?, Error?) -> Void
     ) {
@@ -104,6 +143,7 @@ public struct Network {
             url,
             method: RequestMethod.get,
             headers: headers,
+            query: query,
             body: body,
             then
         )
@@ -112,6 +152,7 @@ public struct Network {
     public static func post (
         _ url: String,
         headers: [String: String] = [:],
+        query: [String: String]? = nil,
         body: Data? = nil,
         _ then: @escaping (Data?, URLResponse?, Error?) -> Void
     ) {
@@ -119,6 +160,7 @@ public struct Network {
             url,
             method: RequestMethod.post,
             headers: headers,
+            query: query,
             body: body,
             then
         )
@@ -127,6 +169,7 @@ public struct Network {
     public static func getJson<Response: Decodable> (
         _ url: String,
         headers: [String: String] = [:],
+        query: [String: String]? = nil,
         body: Data? = nil,
         _ then: @escaping (Response?, URLResponse?, Error?) -> Void
     ) {
@@ -134,6 +177,7 @@ public struct Network {
             url,
             method: RequestMethod.get,
             headers: headers,
+            query: query,
             body: body,
             then
         )
@@ -142,6 +186,7 @@ public struct Network {
     public static func postJson<Response: Decodable> (
         _ url: String,
         headers: [String: String] = [:],
+        query: [String: String]? = nil,
         body: Data? = nil,
         _ then: @escaping (Response?, URLResponse?, Error?) -> Void
     ) {
@@ -149,6 +194,7 @@ public struct Network {
             url,
             method: RequestMethod.post,
             headers: headers,
+            query: query,
             body: body,
             then
         )

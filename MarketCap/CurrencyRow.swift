@@ -16,7 +16,7 @@ struct CurrencyRow: View {
 
         HStack {
 
-            CurrencyIcon (icon: currency.icon)
+            CurrencyIcon (icon: currency.image)
                 .aspectRatio(1.0, contentMode: .fit)
                 .frame(width: 32, height: 32)
                 .fixedSize(horizontal: true, vertical: false)
@@ -36,8 +36,9 @@ struct CurrencyRow: View {
             Spacer()
 
             if currency.rank != nil {
-                Text (String (currency.rank!))
+                Text ("$\(String (currency.price!))")
                     .font (.caption)
+                    .foregroundColor (.yellow)
                     .padding (.trailing, 8)
             }
         }
@@ -51,7 +52,7 @@ struct SwiftUIView_Previews: PreviewProvider {
             name: "Test",
             symbol: "TST",
             rank: 1,
-            icon: "coins/images/1/thumb/bitcoin.png"
+            image: "coins/images/1/thumb/bitcoin.png"
         ))
     }
 }

@@ -34,7 +34,7 @@ struct ContentView_Previews: PreviewProvider {
         name: "Test",
         symbol: "TST",
         rank: 1,
-        icon: "coins/images/1/thumb/bitcoin.png"
+        image: "coins/images/1/thumb/bitcoin.png"
     )
 
     static var previews: some View {

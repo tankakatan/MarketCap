@@ -14,7 +14,7 @@ struct CurrencyView: View {
 
     var body: some View {
         VStack {
-            CurrencyIcon (icon: currency.icon)
+            CurrencyIcon (icon: currency.image)
             Text (currency.name)
         }.frame (maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -27,7 +27,7 @@ struct CurrencyView_Previews: PreviewProvider {
             name: "Test",
             symbol: "TST",
             rank: 1,
-            icon: "coins/images/1/thumb/bitcoin.png"
+            image: "coins/images/1/thumb/bitcoin.png"
         ))
     }
 }
