@@ -17,8 +17,10 @@ struct CurrencyList: View {
             if loader.currencies.count == 0 {
                 Loading ().frame (maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                List (loader.currencies) {
-                    CurrencyRow (currency: $0)
+                List {
+                    ForEach (loader.currencies) {
+                        CurrencyRow (currency: $0)
+                    }
                 }
             }
         }.frame (width: 400, height: 640)
@@ -26,6 +28,15 @@ struct CurrencyList: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    
+    @State static var currency = Currency (
+        id: "test_id",
+        name: "Test",
+        symbol: "TST",
+        rank: 1,
+        icon: "coins/images/1/thumb/bitcoin.png"
+    )
+
     static var previews: some View {
         CurrencyList ()
     }

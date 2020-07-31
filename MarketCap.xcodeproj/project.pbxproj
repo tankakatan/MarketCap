@@ -16,6 +16,7 @@
 		924CE8B824C0D6CB00668D74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924CE8B624C0D6CB00668D74 /* Main.storyboard */; };
 		924CE8C424C0D6CB00668D74 /* MarketCapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924CE8C324C0D6CB00668D74 /* MarketCapTests.swift */; };
 		924CE8CF24C0D6CB00668D74 /* MarketCapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924CE8CE24C0D6CB00668D74 /* MarketCapUITests.swift */; };
+		9250C8F024D4B025000F42B4 /* CurrencyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9250C8EF24D4B025000F42B4 /* CurrencyFilter.swift */; };
 		9286EF6C24C0DF8100FFE836 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EF6B24C0DF8100FFE836 /* Network.swift */; };
 		9286EF6E24C0EDE300FFE836 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EF6D24C0EDE300FFE836 /* NetworkTest.swift */; };
 		92933A3724CB7F77009930B6 /* CurrencyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92933A3624CB7F77009930B6 /* CurrencyRow.swift */; };
@@ -58,6 +59,7 @@
 		924CE8CA24C0D6CB00668D74 /* MarketCapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketCapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		924CE8CE24C0D6CB00668D74 /* MarketCapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCapUITests.swift; sourceTree = "<group>"; };
 		924CE8D024C0D6CB00668D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9250C8EF24D4B025000F42B4 /* CurrencyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFilter.swift; sourceTree = "<group>"; };
 		9286EF6B24C0DF8100FFE836 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		9286EF6D24C0EDE300FFE836 /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
 		92933A3624CB7F77009930B6 /* CurrencyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRow.swift; sourceTree = "<group>"; };
@@ -98,7 +100,6 @@
 				924CE8C224C0D6CB00668D74 /* MarketCapTests */,
 				924CE8CD24C0D6CB00668D74 /* MarketCapUITests */,
 				924CE8AB24C0D6C800668D74 /* Products */,
-				ACB3024538A4F6F9D1EA534B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +119,7 @@
 				922A7E6624C43E1400BCC870 /* Api.swift */,
 				924CE8AD24C0D6C800668D74 /* AppDelegate.swift */,
 				92933A3824CB804A009930B6 /* CurrencyIcon.swift */,
+				9250C8EF24D4B025000F42B4 /* CurrencyFilter.swift */,
 				924CE8AF24C0D6C800668D74 /* CurrencyList.swift */,
 				92933A3624CB7F77009930B6 /* CurrencyRow.swift */,
 				92933A3C24CB836B009930B6 /* CurrencyView.swift */,
@@ -158,13 +160,6 @@
 				924CE8D024C0D6CB00668D74 /* Info.plist */,
 			);
 			path = MarketCapUITests;
-			sourceTree = "<group>";
-		};
-		ACB3024538A4F6F9D1EA534B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +300,7 @@
 				924CE8AE24C0D6C800668D74 /* AppDelegate.swift in Sources */,
 				92933A3B24CB8314009930B6 /* Loading.swift in Sources */,
 				92933A3724CB7F77009930B6 /* CurrencyRow.swift in Sources */,
+				9250C8F024D4B025000F42B4 /* CurrencyFilter.swift in Sources */,
 				92933A3924CB804A009930B6 /* CurrencyIcon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,7 +469,7 @@
 				API_URL = "https://api.coingecko.com/api/v3";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MarketCap/MarketCap.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"MarketCap/Preview Content\"";
@@ -499,7 +495,7 @@
 				API_URL = "https://api.coingecko.com/api/v3";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MarketCap/MarketCap.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"MarketCap/Preview Content\"";

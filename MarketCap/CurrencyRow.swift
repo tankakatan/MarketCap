@@ -17,13 +17,29 @@ struct CurrencyRow: View {
         HStack {
 
             CurrencyIcon (icon: currency.icon)
-                .aspectRatio (1.0, contentMode: .fit)
-                .frame (width: 32, height: 32)
-                .fixedSize (horizontal: true, vertical: false)
-                .cornerRadius (4.0)
+                .aspectRatio(1.0, contentMode: .fit)
+                .frame(width: 32, height: 32)
+                .fixedSize(horizontal: true, vertical: false)
 
-            Text (currency.symbol)
-            Text (currency.name)
+            VStack (alignment: .leading) {
+                Text (currency.symbol)
+                    .fontWeight (.bold)
+                    .truncationMode (.tail)
+                    .frame (minWidth: 20)
+
+                Text (currency.name)
+                    .font (.caption)
+                    .opacity (0.625)
+                    .truncationMode (.middle)
+            }
+            
+            Spacer()
+
+            if currency.rank != nil {
+                Text (String (currency.rank!))
+                    .font (.caption)
+                    .padding (.trailing, 8)
+            }
         }
     }
 }
